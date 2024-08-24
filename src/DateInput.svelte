@@ -161,17 +161,17 @@
   // handle on:focusout for parent element. If the parent element loses
   // focus (e.g input element), visible is set to false
   function onFocusOut(e: FocusEvent) {
-    if (
-      e?.currentTarget instanceof HTMLElement &&
-      e.relatedTarget &&
-      e.relatedTarget instanceof Node &&
-      e.currentTarget.contains(e.relatedTarget)
-    ) {
-      return
-    } else {
-      visible = false
-    }
+  if (
+    e?.currentTarget instanceof HTMLElement &&
+    e.relatedTarget &&
+    e.relatedTarget instanceof Node &&
+    (e.currentTarget.contains(e.relatedTarget) || document.querySelector('.picker-dropdown')?.contains(e.relatedTarget))
+  ) {
+    return;
+  } else {
+    visible = false;
   }
+}
   function keydown(e: KeyboardEvent) {
     if (e.key === 'Escape' && visible) {
       visible = false
